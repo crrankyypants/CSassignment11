@@ -1,5 +1,3 @@
-"""Image Bucket Fill Test Suite"""
-
 import unittest
 import sys
 import io
@@ -24,11 +22,10 @@ def create_adjacency_list(img_graph):
 
 def check_graph(actual_graph, correct_graph):
     """
-    Helper function that checks if the actual graph matches the correct graph.
+    Helper function that checks if the student graph is correct given the correct graph.
 
     Parameters:
-        actual_graph (dict): Graph produced by the student's code, with the same format as
-                             correct_graph.
+        actual_graph (dict): Graph produced by the student's code, with the same format as correct_graph.
         correct_graph (dict): The correct graph to compare against.
 
     Returns:
@@ -70,8 +67,7 @@ def check_graph(actual_graph, correct_graph):
         if sorted(student_edges) != sorted(edges):
             return (
                 False,
-                f"Mismatch in edges for vertex {vertex}: "
-                f"expected {sorted(edges)}, got {sorted(student_edges)}.",
+                f"Mismatch in edges for vertex {vertex}: expected {sorted(edges)}, got {sorted(student_edges)}.",
             )
 
     # If all checks pass
@@ -83,7 +79,7 @@ class TestCreateGraph(unittest.TestCase):
 
     def test_create_graph_1(self):
         """Test chess graph: Validates adjacency list creation."""
-        with open("test_cases/chess.in", encoding="utf-8") as f:
+        with open("chess.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, search_start, search_color = create_graph(data)
             actual_graph_adjacency_list = create_adjacency_list(actual_graph)
@@ -96,7 +92,7 @@ class TestCreateGraph(unittest.TestCase):
 
     def test_create_graph_2(self):
         """Test f1 graph: Checks Validates adjacency list creation."""
-        with open("test_cases/f1.in", encoding="utf-8") as f:
+        with open("f1.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, search_start, search_color = create_graph(data)
             actual_graph_adjacency_list = create_adjacency_list(actual_graph)
@@ -109,7 +105,7 @@ class TestCreateGraph(unittest.TestCase):
 
     def test_create_graph_3(self):
         """Test flags graph: Validates adjacency list creation."""
-        with open("test_cases/flags.in", encoding="utf-8") as f:
+        with open("flags.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, search_start, search_color = create_graph(data)
             actual_graph_adjacency_list = create_adjacency_list(actual_graph)
@@ -122,7 +118,7 @@ class TestCreateGraph(unittest.TestCase):
 
     def test_create_graph_4(self):
         """Test heart graph: Validates adjacency list creation."""
-        with open("test_cases/heart.in", encoding="utf-8") as f:
+        with open("heart.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, search_start, search_color = create_graph(data)
             actual_graph_adjacency_list = create_adjacency_list(actual_graph)
@@ -135,7 +131,7 @@ class TestCreateGraph(unittest.TestCase):
 
     def test_create_graph_5(self):
         """Test horns graph: Validates adjacency Validates adjacency list creation."""
-        with open("test_cases/horns.in", encoding="utf-8") as f:
+        with open("horns.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, search_start, search_color = create_graph(data)
             actual_graph_adjacency_list = create_adjacency_list(actual_graph)
@@ -148,7 +144,7 @@ class TestCreateGraph(unittest.TestCase):
 
     def test_create_graph_6(self):
         """Test small graph: Validates adjacency list creation."""
-        with open("test_cases/small.in", encoding="utf-8") as f:
+        with open("small.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, search_start, search_color = create_graph(data)
             actual_graph_adjacency_list = create_adjacency_list(actual_graph)
@@ -164,8 +160,8 @@ class TestAdjacencyMatrix(unittest.TestCase):
     """create_adjacency_matrix Test Suite"""
 
     def test_create_adjacency_matrix_1(self):
-        """Test chess matrix: Validates the adjacency matrix creation for chessboard-like graph."""
-        with open("test_cases/chess.in", encoding="utf-8") as f:
+        """Test chess matrix: Validates the adjacency matrix creation for a chessboard-like graph."""
+        with open("chess.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, _, _ = create_graph(data)
             student_adjancey_matrix = actual_graph.create_adjacency_matrix()
@@ -173,7 +169,7 @@ class TestAdjacencyMatrix(unittest.TestCase):
 
     def test_create_adjacency_matrix_2(self):
         """Test f1 matrix: Validates the adjacency matrix creation for a check-like graph."""
-        with open("test_cases/check.in", encoding="utf-8") as f:
+        with open("check.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, _, _ = create_graph(data)
             student_adjancey_matrix = actual_graph.create_adjacency_matrix()
@@ -181,7 +177,7 @@ class TestAdjacencyMatrix(unittest.TestCase):
 
     def test_create_adjacency_matrix_3(self):
         """Test flags matrix: Validates the adjacency matrix creation for a f1-like graph."""
-        with open("test_cases/flags.in", encoding="utf-8") as f:
+        with open("flags.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, _, _ = create_graph(data)
             student_adjancey_matrix = actual_graph.create_adjacency_matrix()
@@ -189,7 +185,7 @@ class TestAdjacencyMatrix(unittest.TestCase):
 
     def test_create_adjacency_matrix_4(self):
         """Test heart matrix: Validates the adjacency matrix creation for a heart-like graph."""
-        with open("test_cases/heart.in", encoding="utf-8") as f:
+        with open("heart.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, _, _ = create_graph(data)
             student_adjancey_matrix = actual_graph.create_adjacency_matrix()
@@ -197,7 +193,7 @@ class TestAdjacencyMatrix(unittest.TestCase):
 
     def test_create_adjacency_matrix_5(self):
         """Test horns matrix: Validates the adjacency matrix creation for a random-like graph."""
-        with open("test_cases/random.in", encoding="utf-8") as f:
+        with open("random.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, _, _ = create_graph(data)
             student_adjancey_matrix = actual_graph.create_adjacency_matrix()
@@ -205,7 +201,7 @@ class TestAdjacencyMatrix(unittest.TestCase):
 
     def test_create_adjacency_matrix_6(self):
         """Test small matrix: Validates the adjacency matrix creation for a small-like graph."""
-        with open("test_cases/small.in", encoding="utf-8") as f:
+        with open("small.in", encoding="utf-8") as f:
             data = f.read()
             actual_graph, _, _ = create_graph(data)
             student_adjancey_matrix = actual_graph.create_adjacency_matrix()
@@ -216,7 +212,6 @@ class TestBFS(unittest.TestCase):
     """BFS Test Suite"""
 
     def check_bfs(self, filename, levels, visited):
-        """Validates that the search order is breadth first search"""
         # read input
         with open(filename, encoding="utf-8") as f:
             data = f.read()
@@ -303,32 +298,32 @@ class TestBFS(unittest.TestCase):
     def test_bfs_1(self):
         """Test BFS on chess graph: Validates BFS traversal on the chess graph input."""
         levels, visited = bfs_output.chess_levels, bfs_output.chess_visited
-        self.check_bfs("test_cases/chess.in", levels, visited)
+        self.check_bfs("chess.in", levels, visited)
 
     def test_bfs_2(self):
         """Test BFS on F1 graph: Validates BFS traversal on the F1 circuit layout graph."""
         levels, visited = bfs_output.f1_levels, bfs_output.f1_visited
-        self.check_bfs("test_cases/f1.in", levels, visited)
+        self.check_bfs("f1.in", levels, visited)
 
     def test_bfs_3(self):
         """Test BFS on flags graph: Validates BFS traversal on the flags graph input."""
         levels, visited = bfs_output.flags_levels, bfs_output.flags_visited
-        self.check_bfs("test_cases/flags.in", levels, visited)
+        self.check_bfs("flags.in", levels, visited)
 
     def test_bfs_4(self):
         """Test BFS on heart graph: Validates BFS traversal on the heart-shaped graph."""
         levels, visited = bfs_output.heart_levels, bfs_output.heart_visited
-        self.check_bfs("test_cases/heart.in", levels, visited)
+        self.check_bfs("heart.in", levels, visited)
 
     def test_bfs_5(self):
         """Test BFS on horns graph: Validates BFS traversal on the horns-shaped graph."""
         levels, visited = bfs_output.horns_levels, bfs_output.horns_visited
-        self.check_bfs("test_cases/horns.in", levels, visited)
+        self.check_bfs("horns.in", levels, visited)
 
     def test_bfs_6(self):
         """Test BFS on small graph: Validates BFS traversal on a small, simple graph."""
         levels, visited = bfs_output.small_levels, bfs_output.small_visited
-        self.check_bfs("test_cases/small.in", levels, visited)
+        self.check_bfs("small.in", levels, visited)
 
 
 class TestDFS(unittest.TestCase):
@@ -425,32 +420,32 @@ class TestDFS(unittest.TestCase):
     def test_dfs_1(self):
         """Test DFS on the chess graph using visited order of vertices"""
         visited = bfs_output.chess_visited
-        self.check_dfs("test_cases/chess.in", visited)
+        self.check_dfs("chess.in", visited)
 
     def test_dfs_2(self):
         """Test DFS on the f1 graph using visited order of vertices"""
         visited = bfs_output.f1_visited
-        self.check_dfs("test_cases/f1.in", visited)
+        self.check_dfs("f1.in", visited)
 
     def test_dfs_3(self):
         """Test DFS on the flags graph using visited order of vertices"""
         visited = bfs_output.flags_visited
-        self.check_dfs("test_cases/flags.in", visited)
+        self.check_dfs("flags.in", visited)
 
     def test_dfs_4(self):
         """Test DFS on the heart graph using visited order of vertices"""
         visited = bfs_output.heart_visited
-        self.check_dfs("test_cases/heart.in", visited)
+        self.check_dfs("heart.in", visited)
 
     def test_dfs_5(self):
         """Test DFS on the horns graph using visited order of vertices"""
         visited = bfs_output.horns_visited
-        self.check_dfs("test_cases/horns.in", visited)
+        self.check_dfs("horns.in", visited)
 
     def test_dfs_6(self):
         """Test DFS on the small graph using visited order of vertices"""
         visited = bfs_output.small_visited
-        self.check_dfs("test_cases/small.in", visited)
+        self.check_dfs("small.in", visited)
 
 
 def main():
@@ -466,7 +461,7 @@ def main():
         "Usage: python3 test_graph.py [test_method_or_function] [test_number]\n"
         "Examples:\n"
         "    python3 test_graph.py matrix 1\n"
-        "    python3 test_graph.py dfs 4\n"
+        "    python3 test_reducible.py dfs 4\n"
         "Valid options for [test_method_or_function]: "
         + ", ".join(test_cases.keys())
         + "\n"
