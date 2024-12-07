@@ -264,10 +264,13 @@ class ImageGraph:
         adj_matrix = [[0] * num_vertices for _ in range(num_vertices)]
 
         # populate the matrix 
+        
         for vertex in self.vertices:
+            vertex_index = vertex.index
             for neighbor in vertex.edges:
-                adj_matrix[vertex.index][neighbor.index] = 1 
-                adj_matrix[neighbor.index][vertex.index] = 1
+                adj_matrix[vertex_index][neighbor] = 1 
+                adj_matrix[neighbor][vertex_index] = 1
+
         return adj_matrix
         
 
@@ -309,18 +312,23 @@ class ImageGraph:
         # initialize queue abd add starting index
         queue = Queue()
         queue.enqueue(start_vertex)
+        
+        start_vertex.visit_and_set_color(color)
         start_vertex.visited = True
+        self.print_image()
         # BFS loop
         while not queue.is_empty():
             # get current 
             current = queue.dequeue()
-            current.color = color
-            self.print_image()
+            if current.visited == False:
+                current.visit_and_set_color(color)
+                self.print_image()
             # traverse the edges to see if the neighbor of current are the same as origianl and not visited
             for edge_index in current.edges:
                 edge = self.vertices[edge_index]
                 if edge.color == original_color and not edge.visited:
-                    edge.visited = True 
+                    edge.visit_and_set_color(color)
+                    self.print_image()
                     queue.enqueue(edge)
                     
         self.reset_visited()
@@ -365,19 +373,27 @@ class ImageGraph:
         stack = Stack()
         # push start vertext to the stack 
         stack.push(start_vertex)
-        start_vertex.visited = True
 
+        start_vertex.visit_and_set_color(color)
+        start_vertex.visited = True
+        self.print_image()
         # perform DFS
         while not stack.is_empty():
             current = stack.pop()
-            current.visit_and_set_color(color)
-
+            if current.visited == False:
+                current.visit_and_set_color(color)
+                current.visited = True
+                self.print_image()
             for edge_index in current.edges:
                 edge = self.vertices[edge_index]
                 if edge.color == original_color and not edge.visited:
-                    edge.visit_and_set_color(color)
                     stack.push(edge)
+                    edge.visit_and_set_color(color)
+                    self.print_image()
 
+        
+        print("Ending DFS; initial state:")
+        self.print_image()
         self.reset_visited()
 
 
@@ -415,7 +431,7 @@ def create_graph(data):
         to_vertex = graph.vertices[to_index]
 
         # connect vertex a to b 
-        from_vertex.edges.append(to_index)
+        from_vertex.edges.append(to_vertex)
         to_vertex.edges.append(from_index)
     # read search starting position and color
     start_line = split_data[3 + num_vert +num_edges]
@@ -437,16 +453,16 @@ def main():
     data = sys.stdin.read()
 
     # create graph, passing in data
-    graph = ImageGraph()
-
+    graph, start_index, search_color = create_graph(data)
     # print adjacency matrix in a readable format (maybe row by row)
-
+    graph.create_adjacency_matrix()
     # run bfs
+    graph.bfs(int(start_index), search_color)
 
     # reset by creating graph again
-
+    graph, start_index, search_color = create_graph(data)
     # run dfs
-
+    graph.dfs(start_index, search_color)
 
 if __name__ == "__main__":
     main()
