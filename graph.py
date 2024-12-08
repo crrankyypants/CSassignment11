@@ -387,9 +387,9 @@ class ImageGraph:
             for edge_index in current.edges:
                 edge = self.vertices[edge_index]
                 if edge.color == original_color and not edge.visited:
-                    stack.push(edge)
                     edge.visit_and_set_color(color)
                     self.print_image()
+                    stack.push(edge)
 
         
         print("Ending DFS; initial state:")
@@ -426,13 +426,14 @@ def create_graph(data):
     # connect vertex A to vertex B and the other way around
     num_edges = int(split_data[2+num_vert])
     for j in range(3 + num_vert, 3+ num_vert + num_edges):
-        from_index, to_index = map(int, split_data[j].split(','))
-        from_vertex = graph.vertices[from_index]
+        to_index, from_index = map(int, split_data[j].split(','))
         to_vertex = graph.vertices[to_index]
-
+        from_vertex = graph.vertices[from_index]
+        
         # connect vertex a to b 
-        from_vertex.edges.append(to_vertex)
         to_vertex.edges.append(from_index)
+        from_vertex.edges.append(to_index)
+
     # read search starting position and color
     start_line = split_data[3 + num_vert +num_edges]
     start_index, search_color = start_line.split(",")
